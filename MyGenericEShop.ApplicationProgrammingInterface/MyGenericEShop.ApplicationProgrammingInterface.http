@@ -1,0 +1,6 @@
+@MyGenericEShop.ApplicationProgrammingInterface_HostAddress = http://localhost:5065
+
+GET {{MyGenericEShop.ApplicationProgrammingInterface_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
