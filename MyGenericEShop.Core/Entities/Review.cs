@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MyGenericEShop.Core.Entities
 {
-	public class Review
+	public class Review : BaseEntity
 	{
 		public Guid UserID { get; set; }
 		public Guid ProductID { get; set; }

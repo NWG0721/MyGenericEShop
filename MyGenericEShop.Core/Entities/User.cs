@@ -36,6 +36,10 @@ namespace MyGenericEShop.Core.Entities
 
 
 		public Role Role { get; set; }
+		public List<Review> Reviews { get; set; } = new List<Review>();
+		public List<Order> Orders { get; set; } = new List<Order>();
+		public List<Cart> Carts { get; set; } = new List<Cart>();
+
 	}
 }
 

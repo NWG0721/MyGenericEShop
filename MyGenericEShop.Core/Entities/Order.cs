@@ -14,6 +14,7 @@ namespace MyGenericEShop.Core.Entities
 		public DateTime OrderDate { get; set; } = DateTime.UtcNow;
 
 		public User User { get; set; }
-		public List<OrderItem> OrderItems { get; set; }
+		public List<Payment> Payments { get; set; } = new List<Payment>();
+		public List<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
 	}
 }

@@ -23,4 +23,10 @@
     <ProjectReference Include="..\MyGenericEShop.Core\MyGenericEShop.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="MyGenericEShop.Core">
+      <HintPath>..\MyGenericEShop.Core\bin\Debug\net8.0\MyGenericEShop.Core.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

@@ -12,6 +12,6 @@ namespace MyGenericEShop.Core.Entities
 		public string Description { get; set; }
 
 
-		public List<Category> Categories { get; set; }
+		public List<Category> Categories { get; set; } = new List<Category>();
 	}
 }

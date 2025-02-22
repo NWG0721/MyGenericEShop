@@ -11,6 +11,6 @@ namespace MyGenericEShop.Core.Entities
 		public Guid UserID { get; set; }
 
 		public User User { get; set; } 
-		public List<CartItem> CartItems { get; set; }
+		public List<CartItem> CartItems { get; set; } = new List<CartItem>();
 	}
 }
