@@ -12,7 +12,8 @@ namespace MyGenericEShop.DataAccessLayer
 {
 	public class MyGenericEshopDBContext : DbContext
 	{
-		MyGenericEshopDBContext(DbContextOptions<MyGenericEshopDBContext> options) : base(options)
+		public MyGenericEshopDBContext(DbContextOptions<MyGenericEshopDBContext> options)
+			: base(options)
 		{ }
 
 		#region GenericDbSet
@@ -49,23 +50,21 @@ namespace MyGenericEShop.DataAccessLayer
 
 			builder.Entity<User>(user =>
 			{
-
 				user.ToTable(nameof(User));
 				user.HasKey(u => u.ID);
 				user.HasIndex(u => u.Username).IsUnique();
 				user.HasIndex(u => u.PhoneNumber).IsUnique();
 				user.HasIndex(u => u.Email).IsUnique();
-				user.Property(u => u.Role).IsRequired();
-				user.Property(u => u.Role).HasDefaultValue("User");
+				user.Property(u => u.RoleID).IsRequired();
 				user.Property(u => u.Fullname).HasMaxLength(150);
 				user.Property(u => u.Email).HasMaxLength(256);
 
 				//------------------| Relations |------------------\\
 
 				user.HasOne(u => u.Role)
-				.WithMany(r => r.Users)
-				.HasForeignKey(u => u.RoleID)
-				.OnDelete(DeleteBehavior.Restrict);
+					.WithMany(r => r.Users)
+					.HasForeignKey(u => u.RoleID)
+					.OnDelete(DeleteBehavior.Restrict);
 			});
 
 			#endregion
@@ -73,14 +72,18 @@ namespace MyGenericEShop.DataAccessLayer
 			#region Fluent API For The "Role" Table
 
 			builder.Entity<Role>(role =>
-				{
-					role.ToTable(nameof(Role));
-					role.HasKey(r => r.ID);
-					role.Property(r => r.Name).HasMaxLength(50);
-					role.Property(r => r.Description).HasMaxLength(256);
+			{
+				role.ToTable(nameof(Role));
+				role.HasKey(r => r.ID);
+				role.Property(r => r.Name).HasMaxLength(50);
+				role.Property(r => r.Description).HasMaxLength(256);
 
-					//------------------| Relations |------------------\\
-				});
+				//------------------| Relations |------------------\\
+				role.HasMany(r => r.Users)
+					.WithOne(u => u.Role)
+					.HasForeignKey(u => u.RoleID)
+					.OnDelete(DeleteBehavior.Restrict);
+			});
 
 			#endregion
 
@@ -167,7 +170,7 @@ namespace MyGenericEShop.DataAccessLayer
 			{
 				view.ToTable(nameof(Review));
 				view.HasKey(r => r.ID);
-				view.Property(r => r.Rating).HasColumnType("decimal(2.1)");
+				view.Property(r => r.Rating).HasColumnType("decimal(3.1)");
 				view.Property(r => r.Comment).HasMaxLength(500);
 
 				//------------------| Relations |------------------\\
@@ -182,7 +185,7 @@ namespace MyGenericEShop.DataAccessLayer
 				view.HasOne(r => r.Product).
 				WithMany(p => p.reviews).
 				HasForeignKey(r => r.ProductID).
-				OnDelete(DeleteBehavior.Cascade);
+				OnDelete(DeleteBehavior.SetNull);
 			});
 
 			#endregion
