@@ -30,6 +30,7 @@ namespace MyGenericEShop.Core.Entities
 	    public bool IsEmailVerified { get; set; }
 		public bool isPhoneVerified { get; set; }
 		public bool Gender { get; set; }
+		public bool HasTelegram { get; set; }
 
 		public DateTime BirthDay { get; set; }
 		public DateTime LastLogin { get; set; }

@@ -58,7 +58,7 @@ namespace MyGenericEShop.DataAccessLayer
 				user.Property(u => u.RoleID).IsRequired();
 				user.Property(u => u.Fullname).HasMaxLength(150);
 				user.Property(u => u.Email).HasMaxLength(256);
-
+				user.Property(u => u.Password).IsRequired(false);
 				//------------------| Relations |------------------\\
 
 				user.HasOne(u => u.Role)

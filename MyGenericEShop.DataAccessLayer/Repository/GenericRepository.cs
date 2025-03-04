@@ -72,6 +72,7 @@ namespace MyGenericEShop.DataAccessLayer.Repository
 		#endregion
 
 		#region Delete
+
 		public async Task<bool> DeleteAsync(T entity)
 		{
 			try
