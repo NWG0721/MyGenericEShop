@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyGenericEShop.Core.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -7,11 +8,12 @@ using System.Threading.Tasks;
 
 namespace MyGenericEShop.Core.Interfaces.Repositories
 {
-	public interface IGenericRepository<T> where T : class
+	public interface IGenericRepository<T> where T : BaseEntity
 	{
 		// Select
 		Task<List<T>> SelectAllAsync();
 		Task<List<T>> FilteredSelectionAsync(Expression<Func<T, bool>> expression);
+		Task<T> SelectByID(Guid id);
 
 		// Insert
 		Task<bool> InsertAsync(T entity);

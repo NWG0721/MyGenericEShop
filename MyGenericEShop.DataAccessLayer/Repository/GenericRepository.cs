@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MyGenericEShop.Core.Entities;
 using MyGenericEShop.Core.Interfaces.Repositories;
 using System;
+using System.Buffers.Text;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -9,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace MyGenericEShop.DataAccessLayer.Repository
 {
-	public class GenericRepository<T> : IGenericRepository<T> where T : class
+	public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
 	{
 		#region Constructor
 
@@ -32,6 +34,10 @@ namespace MyGenericEShop.DataAccessLayer.Repository
 		public async Task<List<T>> FilteredSelectionAsync(Expression<Func<T, bool>> expression)
 		{
 			return await db.Set<T>().Where(expression).ToListAsync();
+		}
+		public async Task<T> SelectByID(Guid id)
+		{
+			return await db.Set<T>().FirstOrDefaultAsync(e=> e.ID == id);
 		}
 
 		#endregion
@@ -77,11 +83,8 @@ namespace MyGenericEShop.DataAccessLayer.Repository
 		{
 			try
 			{
-
 				var entry = db.Set<T>().Remove(entity);
-
 				return true;
-
 			}
 			catch (Exception)
 			{
@@ -118,6 +121,8 @@ namespace MyGenericEShop.DataAccessLayer.Repository
 		{
 			return db.SaveChangesAsync();
 		}
+
+
 
 		#endregion
 	}

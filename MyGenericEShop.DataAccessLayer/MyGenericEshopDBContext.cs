@@ -40,9 +40,10 @@ namespace MyGenericEShop.DataAccessLayer
 			builder.Entity<OrderItem>();
 			builder.Entity<CartItem>();
 			builder.Entity<Cart>();
+			builder.Entity<TelegramTokens>();
+			
 
 			*/
-
 
 			#endregion
 
@@ -286,6 +287,24 @@ namespace MyGenericEShop.DataAccessLayer
 			});
 
 			#endregion
+
+			#region Fluent API For The "TelegramTokens" Table
+
+			builder.Entity<TelegramTokens>(tt =>
+			{
+				tt.ToTable(nameof(TelegramTokens));
+				tt.HasKey(t => t.ID);
+				tt.Property(t => t.Name).HasMaxLength(50);
+				tt.Property(t => t.Description).HasMaxLength(150);
+				tt.Property(t => t.Description).IsRequired(false);
+				tt.Property(t => t.Token).IsRequired(true);
+
+
+				//------------------| Relations |------------------\\
+			});
+
+			#endregion
+
 
 			base.OnModelCreating(builder);
 		}

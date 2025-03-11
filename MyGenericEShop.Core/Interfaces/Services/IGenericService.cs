@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,34 +12,39 @@ namespace MyGenericEShop.Core.Interfaces.Services
 	{
 		#region Select
 
-		public List<T> GetAll();
-
-		public T Filter(Guid id);
+		Task<List<T>> GetAllAsync();
+		Task<T> GetByIdAsync(Guid id);
+		Task<List<T>> FilterAsync(Expression<Func<T, bool>> predicate);
 
 		#endregion
 
 		#region Insert
 
-		public bool InsertAndSave(T entity);
-
-		public bool Insert(T entity);
+		Task<bool> InsertAsync(T entity);
+		Task<int> InsertAndSaveAsync(T entity);
 
 		#endregion
 
 		#region Update
 
-		public bool UpdateAndSave(T entity);
-		public bool Update(T entity);
+		Task<bool> UpdateAsync(T entity);
+		Task<int> UpdateAndSaveAsync(T entity);
 
 		#endregion
 
 		#region Delete
 
-		public bool DeleteAndSave(Guid id);
-		public bool Delete(Guid id);
+		Task<bool> DeleteAsync(Guid id);
+		Task<int> DeleteAndSaveAsync(Guid id);
+		Task<bool> DeleteAllAsync(T entity);
+		Task<int> DeleteAllAndSaveAsync(T entity);
 
 		#endregion
 
+		#region Saving
 
+		Task<int> SaveChangesAsync();
+
+		#endregion
 	}
 }

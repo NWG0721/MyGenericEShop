@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyGenericEShop.DataAccessLayer;
 
@@ -11,9 +12,11 @@ using MyGenericEShop.DataAccessLayer;
 namespace MyGenericEShop.DataAccessLayer.Migrations
 {
     [DbContext(typeof(MyGenericEshopDBContext))]
-    partial class MyGenericEshopDBContextModelSnapshot : ModelSnapshot
+    [Migration("20250304112208_add_telegram_feature_in_users_table")]
+    partial class add_telegram_feature_in_users_table
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -367,36 +370,6 @@ namespace MyGenericEShop.DataAccessLayer.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Role", (string)null);
-                });
-
-            modelBuilder.Entity("MyGenericEShop.Core.Entities.TelegramTokens", b =>
-                {
-                    b.Property<Guid>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("DateCreate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DateModify")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("Token")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("TelegramTokens", (string)null);
                 });
 
             modelBuilder.Entity("MyGenericEShop.Core.Entities.User", b =>
