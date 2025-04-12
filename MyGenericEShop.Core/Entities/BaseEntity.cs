@@ -11,5 +11,6 @@ namespace MyGenericEShop.Core.Entities
 		public Guid ID { get; set; } = Guid.NewGuid();
 		public DateTime DateCreate { get; set; } = DateTime.UtcNow;
 		public DateTime? DateModify { get; set; }
+		public bool IsDelete { get; set; }
 	}
 }

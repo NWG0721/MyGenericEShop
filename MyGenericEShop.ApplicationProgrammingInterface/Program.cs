@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using MyGenericEShop.Core.Interfaces.Repositories;
 using MyGenericEShop.DataAccessLayer;
 using MyGenericEShop.DataAccessLayer.Repository;
+using MyGenericEShop.DataAccessLayer.UnitOfWork;
 
 namespace MyGenericEShop.ApplicationProgrammingInterface
 {
@@ -30,6 +31,8 @@ namespace MyGenericEShop.ApplicationProgrammingInterface
 			#region DependencyInjections
 
 			builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+
+			builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 			#endregion
 

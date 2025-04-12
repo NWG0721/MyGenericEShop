@@ -12,39 +12,62 @@ namespace MyGenericEShop.Core.Interfaces.Services
 	{
 		#region Select
 
+		//------------------| Only those not deleted |------------------\\
 		Task<List<T>> GetAllAsync();
 		Task<T> GetByIdAsync(Guid id);
 		Task<List<T>> FilterAsync(Expression<Func<T, bool>> predicate);
+		//------------------| Only the soft deleted ones |------------------\\
+		Task<List<T>> GetAllSoftDeleteAsync();
+		Task<T> GetSoftDeleteByIdAsync(Guid id);
+		Task<List<T>> FilteroftDeleteAsync(Expression<Func<T, bool>> predicate);
 
 		#endregion
 
 		#region Insert
 
-		Task<bool> InsertAsync(T entity);
-		Task<int> InsertAndSaveAsync(T entity);
+		//------------------| Adding new record without saving changes |------------------\\
+		Task<bool> AddAsync(T entity);
+		Task<int> AddManyAsync(List<T> entity);
+
+		//------------------| Adding new record with saving changes |------------------\\
+		Task<bool> AddAndSaveAsync(T entity);
+		Task<int> AddManyAndSaveAsync(List<T> entity);
 
 		#endregion
 
 		#region Update
 
-		Task<bool> UpdateAsync(T entity);
-		Task<int> UpdateAndSaveAsync(T entity);
+		//------------------| Editing record without saving changes |------------------\\
+		Task<bool> EditAsync(T entity);
+		//------------------| Editing record with saving changes |------------------\\
+		Task<int> EditAndSaveAsync(T entity);
 
 		#endregion
 
 		#region Delete
 
+		//------------------| Hard delete without saving |------------------\\
 		Task<bool> DeleteAsync(Guid id);
+		Task<bool> DeleteManyAsync(Expression<Func<T, bool>> expression);
+		//------------------| Hard delete with saving |------------------\\
 		Task<int> DeleteAndSaveAsync(Guid id);
-		Task<bool> DeleteAllAsync(T entity);
-		Task<int> DeleteAllAndSaveAsync(T entity);
+		Task<int> DeleteManyAndSaveAsync(Expression<Func<T, bool>> expression);
+		//------------------| Soft delete without saving |------------------\\
+		Task<bool> SoftDeleteAsync(Guid id);
+		Task<bool> SoftDeleteManyAsync(Expression<Func<T, bool>> expression);
+		//------------------| Soft delete with saving |------------------\\
+		Task<int> SoftDeleteAndSaveAsync(Guid id);
+		Task<int> SoftDeleteManyAndSaveAsync(Expression<Func<T, bool>> expression);
 
 		#endregion
+		#region Extras
+		Task<bool> ExistAsync(Expression<Func<T, bool>> predicate);
 
-		#region Saving
+		Task<int> CountAsync();
+		Task<int> CountAsync(Expression<Func<T, bool>> predicate);
 
-		Task<int> SaveChangesAsync();
-
+		Task<bool> RestoreAsync(Guid id);
+		Task<int> RestoreManyAsync(Expression<Func<T, bool>> predicate);
 		#endregion
 	}
 }

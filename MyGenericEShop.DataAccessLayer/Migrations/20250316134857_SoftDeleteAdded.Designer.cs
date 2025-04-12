@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyGenericEShop.DataAccessLayer;
 
@@ -11,9 +12,11 @@ using MyGenericEShop.DataAccessLayer;
 namespace MyGenericEShop.DataAccessLayer.Migrations
 {
     [DbContext(typeof(MyGenericEshopDBContext))]
-    partial class MyGenericEshopDBContextModelSnapshot : ModelSnapshot
+    [Migration("20250316134857_SoftDeleteAdded")]
+    partial class SoftDeleteAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
