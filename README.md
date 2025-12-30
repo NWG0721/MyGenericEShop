@@ -1,8 +1,9 @@
-[![English](https://img.shields.io/badge/English-8A2BE2)](#english-section)\
-https://img.shields.io/badge/just%20the%20message-8A2BE2
-[![فارسی](https://img.shields.io/badge/فارسی-کلیک-red)](#persian-section)
-
+[![Persian](https://img.shields.io/badge/Persian-addf00)](#persian-section)
+[![English](https://img.shields.io/badge/English-8A2BE2)](#english-section)
 ---
+
+## Persian Section
+محتوای فارسی اینجا...
 
 ## English Section
 Your English content here...
@@ -21,7 +22,3 @@ Your English content here...
 
 
 
-
-
-## Persian Section
-محتوای فارسی اینجا...
