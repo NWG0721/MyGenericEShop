@@ -39,7 +39,7 @@ using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
 
 using var cts = new CancellationTokenSource();
-var bot = new TelegramBotClient("7712959982:AAGMmr7QYV9uBLsc2DAtt_TbvkCCxfpmGjw", cancellationToken: cts.Token);
+var bot = new TelegramBotClient("The token of telegram bot", cancellationToken: cts.Token);
 var me = await bot.GetMe();
 bot.OnError += OnErrorAsync;
 bot.OnMessage += OnMessageAsync;
