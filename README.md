@@ -1,8 +1,12 @@
-[![Persian](https://img.shields.io/badge/Persian-addf00)](#/persian-section)
-[![English](https://img.shields.io/badge/English-8A2BE2)](#/english-section)
 
-<a name="persian-section"></a>
-## زبان فارسی
+<a href="#persian">
+  <img src="https://img.shields.io/badge/Persian-addf00">
+</a>
+<a href="#english">
+  <img src="https://img.shields.io/badge/English-8A2BE2">
+</a>
+
+<h2 id="persian">زبان فارسی</h2>
 ### پروژه Generic E-shop.
 این پروژه یک نمونه **بک‌اند فروشگاهی ساده و جنریک** است که با زبان **C# خالص** پیاده‌سازی شده و هدف اصلی آن، نمایش نحوه‌ی طراحی صحیح ساختارهای **`CRUD`** با استفاده از **`Generic Programming`** می‌باشد.
 
@@ -246,8 +250,7 @@
 > این Repository به گونه‌ای طراحی شده است که
 > بدون تغییر در منطق اصلی،
 > قابل استفاده با هر نوع Entity و دیتابیس باشد.
-<a name="english-Section"></a>
-## English Section
+<h2 id="english">English Section</h2>
 
 ### Generic E-Shop Project
 
