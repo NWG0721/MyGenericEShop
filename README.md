@@ -1,6 +1,7 @@
-[![Persian](https://img.shields.io/badge/Persian-addf00)](#زبان-فارسی)
-[![English](https://img.shields.io/badge/English-8A2BE2)](#english-section)
+[![Persian](https://img.shields.io/badge/Persian-addf00)](#/persian-section)
+[![English](https://img.shields.io/badge/English-8A2BE2)](#/english-section)
 
+<a name="persian-section"></a>
 ## زبان فارسی
 ### پروژه Generic E-shop.
 این پروژه یک نمونه **بک‌اند فروشگاهی ساده و جنریک** است که با زبان **C# خالص** پیاده‌سازی شده و هدف اصلی آن، نمایش نحوه‌ی طراحی صحیح ساختارهای **`CRUD`** با استفاده از **`Generic Programming`** می‌باشد.
@@ -179,7 +180,7 @@
 - پشتیبانی از Soft Delete (IsDelete)
 طراحی شده است.
 ---
-### فسمت Select Operations
+### قسمت Select Operations
 - متد**SelectAll**
   - دریافت لیست Entityها با قابلیت فیلتر دینامیک
   - پشتیبانی از Soft Delete
@@ -212,18 +213,306 @@
 
 - متد **Hard Delete**
   - حذف دائمی داده از دیتابیس
-
 - DeleteAsync
 - DeleteByIdAsync
 - DeleteManyAsync
 
+### قسمت Restore Operations
+- متد **RestoreAsync**
+  - بازیابی Entity حذف‌شده
+
+- متد **RestoreManyAsync**
+  - بازیابی گروهی Entityها
+
+این قابلیت باعث می‌شود داده‌ها
+به صورت ایمن و قابل مدیریت حذف شوند.
 
 
+## 📊 کلاس OperationResult
+``` این کلاس در آدرس زیر واقع شده است
++---MyGenericEShop.Core
+|   +---Common
+|   |   \---Results
+``` 
+تمامی عملیات Repository یک شیء استاندارد از نوع OperationResult
+بازمی‌گردانند که شامل:
+- وضعیت موفقیت
+- پیام عملیات
+- داده خروجی
+- کد خطا
+- زمان اجرا
+می‌باشد.
+
+> این Repository به گونه‌ای طراحی شده است که
+> بدون تغییر در منطق اصلی،
+> قابل استفاده با هر نوع Entity و دیتابیس باشد.
+<a name="english-Section"></a>
 ## English Section
-Your English content here...
 
+### Generic E-Shop Project
 
+This project is a **simple and generic back-end store** implemented in **pure C#**.  
+Its main goal is to demonstrate the correct design of **`CRUD` operations** using **`Generic Programming`** concepts.
 
+The project is designed to:
+- Implement reusable `CRUD` operations
+- Minimize dependencies between different parts of the code
+- Keep the project structure simple, readable, and maintainable
+
+This project serves as an **educational example** focusing on:
+- The use of **`Generic Classes` and `Interfaces`**
+- **Separation of Concerns**
+- Clean and understandable code design
+
+In the current version:
+- Data is managed in-memory for simplicity
+- The focus is on design and structure, not on real database implementation
+
+---
+
+## 📂 Project Structure
+```
++---MyGenericEShop.Core
+| +---Common
+| | ---Results
+| +---Entities
+| +---Interfaces
+| | ---Repositories
++---MyGenericEShop.DataAccessLayer
+| +---Repository
+| ---UnitOfWork
++---MyGenericEShop.ApplicationProgrammingInterface
+```
+---
+
+## ▶️ `Program.cs` (Entry Point)
+
+This file, located in the `ApplicationProgrammingInterface` layer, is the starting point of the program and is responsible for:
+- Initializing the application
+- Creating instances of core classes
+- Running sample store scenarios
+- Connecting to data sources (if any)
+
+### Execution Flow:
+1. Program starts from the `Main` method
+2. A repository instance is created
+3. Test/sample data is generated
+4. Main store methods are executed
+
+---
+
+## 🧩 Entities (Domain Models)
+
+This section includes the **core domain entities** of the project.  
+Each `Entity` represents a real-world concept in an online store and is solely responsible for **data storage**. No complex business logic is included in these classes.
+
+These Entities serve as the foundation for database tables and CRUD operations in the `Data Access` layer.
+
+---
+
+## Core Layer
+
+### `BaseEntity`
+
+This class is the base for all project entities and provides common properties for all other entities.
+
+**Responsibilities:**
+- Define a unique identifier (ID) for each entity
+- Avoid code duplication across entities
+
+All other entities inherit from this class.
+
+---
+
+### `Cart`
+Represents a user's shopping cart before finalizing an order.
+
+**Responsibilities:**
+- Store items selected by the user
+- Link the cart to the user
+
+---
+
+### `CartItem`
+Represents a single item in a cart.
+
+**Properties:**
+- Selected product
+- Quantity
+- Price at the time of addition
+
+---
+
+### `Product`
+Represents a product available for sale.
+
+**Information includes:**
+- Product name
+- Price
+- Category
+- Description
+
+---
+
+### `Category`
+Organizes products into categories for better store management.
+
+---
+
+### `CategoryType`
+Defines the type or level of a category (supports hierarchical or flexible categorization).
+
+---
+
+### `Order`
+Represents an order placed by a user.
+
+**Important:**  
+An order is created after the shopping cart is finalized.
+
+---
+
+### `OrderItem`
+Represents individual items within an order.
+
+Each `Order` contains one or more `OrderItem`s.
+
+---
+
+### `Payment`
+Stores payment information for an order.
+
+---
+
+### `Price`
+Manages the price amount separately to prevent duplication and improve flexibility.
+
+---
+
+### `Review`
+Allows users to leave ratings and reviews for products.
+
+---
+
+### `User`
+Represents a system user with identity and access information.
+
+---
+
+### `Role`
+Defines user roles, such as `Admin` or `Customer`.
+
+---
+
+### `TelegramTokens`
+Stores information for integrating a Telegram bot with the system.
+
+---
+
+> All entities are designed to be database-agnostic and can be used with any `Data Access` implementation.
+
+---
+
+## Data Access Layer
+
+### 🗄️ `GenericRepository<T>`
+
+This class is a generic implementation of the **Repository pattern**, providing CRUD operations for any `Entity` that inherits from `BaseEntity`.
+
+It is **independent of the entity type** and can be used for all tables in the project.
+
+---
+
+### Generic Constraint
+
+This repository can only be used with entities that inherit from `BaseEntity`.  
+
+This constraint ensures:
+- Presence of a unique identifier (ID)
+- Support for soft deletes (`IsDelete`)
+
+---
+
+### Select Operations
+
+- **SelectAll**
+  - Retrieves a list of entities with dynamic filtering
+  - Supports soft delete
+  - Supports `CancellationToken`
+
+- **SelectByIdAsync**
+  - Retrieves a single entity by ID
+  - Can include soft-deleted entities
+
+---
+
+### Insert Operations
+
+- **InsertAsync**
+  - Adds a new entity
+  - Handles operation cancellation with `CancellationToken`
+  - Returns a standardized operation result
+
+- **InsertManyAsync**
+  - Adds multiple entities in bulk
+
+---
+
+### Update Operations
+
+- **UpdateAsync**
+  - Updates an entity without dependency on its type
+
+---
+
+### Delete Operations
+
+Supports both types of deletion:
+
+- **Soft Delete**
+  - Entity is not removed from the database
+  - `IsDelete` flag is set
+
+- **Hard Delete**
+  - Entity is permanently removed from the database
+
+- Available methods:
+  - DeleteAsync
+  - DeleteByIdAsync
+  - DeleteManyAsync
+
+---
+
+### Restore Operations
+
+- **RestoreAsync**
+  - Restores a soft-deleted entity
+
+- **RestoreManyAsync**
+  - Restores multiple soft-deleted entities
+
+This ensures data is **safely managed and recoverable**.
+
+---
+
+## 📊 `OperationResult` Class
+
+Location in project:
+
+```
++---MyGenericEShop.Core
+| +---Common
+| | ---Results
+```
+
+All repository operations return a standardized `OperationResult` object containing:
+- Success status
+- Message
+- Returned data
+- Error/operation code
+- Execution timestamp
+
+> This repository is designed to be **usable with any entity and database** without changing the core business logic.
 
 
 
